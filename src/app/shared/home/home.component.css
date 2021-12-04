@@ -1,0 +1,28 @@
+
+* {
+    text-align: center;
+}
+
+.titulo_home{
+    margin-top: 5%;
+    color: white;
+}
+
+.p_inicial {
+    margin-top: 5%;
+    font-size: 120%;
+
+}
+
+section div {
+    display: inline-block;
+    padding: 10%;
+}
+p {
+    margin-top: 10%;
+    font-weight: bold;
+
+}
+
+
+

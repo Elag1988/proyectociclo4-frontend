@@ -1,0 +1,29 @@
+.btn-delete {
+    border-radius: 5px;
+}
+
+.row {
+    float: left;
+    width: auto;
+    height: auto;
+    position: relative;
+
+}
+
+.card {
+    float: left;
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.card .img {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    
+
+}

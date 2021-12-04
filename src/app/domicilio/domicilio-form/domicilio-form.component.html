@@ -1,0 +1,58 @@
+
+
+<div class="col-lg-6 offset-sm-3">
+
+    <form (ngSubmit)=" edit?updateDomicilio():createDomicilio()" #form="ngForm" class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend class="text-center">{{edit?"Actualizar Domicilio":"Crear Domicilio"}}</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-12 control-label pb-2" for="nombre">cliente</label>
+                <div class="col-md-12">
+                    <input id="nombre" name="nombre" type="text" placeholder="Nombre del producto"
+                        [(ngModel)]="domicilio.cliente" class="form-control input-md pb-2" [disabled]="true"
+                        required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-12 control-label pb-2 pt-2 " for="photoUrl">Direccion del cliente</label>
+                <div class="col-md-12">
+                    <input id="direccion" name="direccion" type="text" placeholder="Direccion del cliente"
+                        [(ngModel)]="domicilio.direccion" class="form-control input-md pb-2" required="">
+
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="estadoPedido">Estado del Pedido</label>
+                <div class="col-md-12">
+                    <select id="estadoPedido" name="estadoPedido"  [(ngModel)]="domicilio.estadoPedido" class="form-control">
+                        <option selected value="Por responder">Por responder</option>
+                        <option value="En Preparacion">En Preparacion</option>
+                        <option value="Despachado">Despachado</option>
+                        <option value="Rechazado">Rechazado</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="edit"></label>
+                <div class="col-md-8">
+                    <button id="edit" name="edit" class="btn btn-info" data-bs-dismiss="modal">Guardar</button>
+                    <a id="cancel" name="cancel" class="btn btn-danger" [routerLink]="['/domicilio/list']"
+                        routerLinkActive="router-link-active">Volver</a>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+</div>

@@ -1,0 +1,83 @@
+<div class="col-lg-6 offset-sm-3">
+
+    <form (ngSubmit)=" edit?updateProduct():createProduct()" #form="ngForm" class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend class="text-center">{{edit?"Actualizar Producto":"Crear Producto"}}</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-12 control-label pb-2" for="nombre">Nombre del Producto</label>
+                <div class="col-md-12">
+                    <input id="nombre" name="nombre" type="text" placeholder="Nombre del producto"
+                        [(ngModel)]="product.nombre" class="form-control input-md pb-2" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-12 control-label pb-2 pt-2 " for="photoUrl">Foto del Producto</label>
+                <div class="col-md-12">
+                    <input id="photoUrl" name="photoUrl" type="text" placeholder="Foto del Producto"
+                        [(ngModel)]="product.photoUrl" class="form-control input-md pb-2" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-12 control-label pb-2 pt-2" for="precioDeVenta">Precio de Venta</label>
+                <div class="col-md-12">
+                    <input id="precioDeVenta" name="precioDeVenta" type="text"
+                        placeholder="Precio de Venta del producto" [(ngModel)]="product.precioDeVenta"
+                        class="form-control input-md pb-2" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-12 control-label pb-2 pt-2" for="precioDeCompra">Precio de Compra</label>
+                <div class="col-md-12">
+                    <input id="precioDeCompra" name="precioDeCompra" type="text" 
+                    placeholder="Precio de Compra del producto" [(ngModel)]="product.precioDeCompra" 
+                    class=" form-control input-md pb-2" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-12 control-label pb-2 pt-2" for="stock">Unidades Disponibles</label>
+                <div class="col-md-12">
+                    <input id="stock" name="stock" type="text" placeholder="Unidades Disponibles del Producto"
+                        [(ngModel)]="product.stock" class="form-control input-md pb-2" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-12 control-label pb-2 pt-2" for="descuento">Descuento</label>
+                <div class="col-md-12">
+                    <input id="descuento" name="descuento" type="text" placeholder="Descuento del producto"
+                        [(ngModel)]="product.descuento" class="form-control input-md pb-2" required="">
+
+                </div>
+            </div>
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="edit"></label>
+                <div class="col-md-8">
+                    <button id="edit" name="edit" class="btn btn-info" data-bs-dismiss="modal">Guardar</button>
+                    <a id="cancel" name="cancel" class="btn btn-danger" [routerLink]= "['/producto/list']" routerLinkActive="router-link-active" >Volver</a>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+</div>

@@ -1,0 +1,163 @@
+
+<br />
+
+<div class="container">
+  <h5 class="text-center mt-1"><strong>Lista de Domicilios</strong></h5>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-success me-md-2 mb-2" type="button" data-bs-toggle="modal"
+      data-bs-target="#modalAddDomicilio"> <i class="fas fa-plus-circle"></i> Agregar Domicilios </button>
+  </div>
+
+  <i class="fa-solid fa-circle-plus"></i>
+
+  <table class="table">
+    <thead>
+      <tr class="text-center">
+        <th scope="col">ID</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Fecha de Entrega</th>
+        <th scope="col">Estado del Pedido</th>
+        <th scope="col">Acciones</th>
+        <th scope="col">Acciones</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of domicilioList" style="text-align: center;">
+        <th scope="row">{{item.idDomicilio}}</th>
+        <td>{{item.cliente}}</td>
+        <td>{{item.direccion}}</td>
+        <td>{{item.fechaEntrega}}</td>
+        <td>{{item.estadoPedido}}</td>
+        <td (click)="deleteDomicilio(item.idDomicilio!)" button class="btn-delete" type="button"><i class= "far fa-trash-alt"></i></td>
+        <td> <a [routerLink]="['/domicilio/edit', item.idDomicilio!]" routerLinkActive="router-link-active" class="edit"><i class="far fa-edit"></i></a></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- Modal Agregar Productos -->
+  <form (ngSubmit)="createDomicilio()" #form="ngForm" class="form-horizontal"> 
+    <div class="modal fade" id="modalAddDomicilio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo Domicilio</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-12 control-label pb-2" for="nombre">Cliente</label>
+              <div class="col-md-12">
+                <input id="nombre" name="nombre" type="text" placeholder="Nombre cliente"
+                  [(ngModel)]="domicilio.cliente" class="form-control input-md pb-2" required="">
+
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-12 control-label pb-2 pt-2 " for="photoUrl">Direccion del cliente</label>
+              <div class="col-md-12">
+                <input id="direccion" name="direccion" type="text" placeholder="Escriba la direccion del cliente"
+                  [(ngModel)]="domicilio.direccion" class="form-control input-md pb-2" required="">
+
+              </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-12 control-label" for="estadoPedido">Estado del Pedido</label>
+              <div class="col-md-12">
+                  <select id="estadoPedido" name="estadoPedido"  [(ngModel)]="domicilio.estadoPedido" class="form-control">
+                      <option selected value="Por responder">Por responder</option>
+                      <option value="En Preparacion">En Preparacion</option>
+                      <option value="Despachado">Despachado</option>
+                      <option value="Rechazado">Rechazado</option>
+                  </select>
+              </div>
+            </div>
+
+          <!--Buttons-->
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" [routerLink]="['/domicilio/list']"
+              routerLinkActive="active">Cerrar</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+              (click)="createDomicilio()">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+  <!--Modal sin funcionamiento-->  
+  <!-- Modal Acualizar Productos -->
+
+
+  <form (ngSubmit)=" edit?updateDomicilio():createDomicilio()" #form="ngForm" class="form-horizontal">
+
+    <div class="modal fade" id="modalEditDomicilio" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Actualizar Domicilio</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Form Name -->
+            <legend class="text-center">{{edit?"Actualizar Domicilio":"Crear Domicilio"}}</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-12 control-label pb-2" for="nombre">Cliente</label>
+              <div class="col-md-12">
+                <input id="nombre" name="nombre" type="text" placeholder="Nombre del cliente"
+                  [(ngModel)]="domicilio.cliente" class="form-control input-md pb-2" [disabled] = "true" required="">
+
+              </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-12 control-label" for="estadoPedido">Estado del Pedido</label>
+              <div class="col-md-12">
+                  <select id="estadoPedido" name="estadoPedido"  [(ngModel)]="domicilio.estadoPedido" class="form-control">
+                      <option selected value="Por responder">Por responder</option>
+                      <option value="En Preparacion">En Preparacion</option>
+                      <option value="Despachado">Despachado</option>
+                      <option value="Rechazado">Rechazado</option>
+                  </select>
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-12 control-label pb-2 pt-2" for="precioDeVenta">Estado del Pedido</label>
+              <div class="col-md-12">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="0">Por responder</option>
+                  <option value="1">En preparacion</option>
+                  <option value="2">Despechado</option>
+                  <option value="3">Rechazado</option>
+                </select>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" [routerLink]="['/domicilio/list']"
+              routerLinkActive="active">Cerrar</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+              (click)="updateDomicilio()">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</div>

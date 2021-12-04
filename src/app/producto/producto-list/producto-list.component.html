@@ -1,0 +1,142 @@
+<br/>
+
+<div>
+    <h5 class="text-center mt-1"><strong>Inventario de productos</strong></h5>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+        <button class="btn btn-success me-md-2 mb-2" type="button" data-bs-toggle="modal" data-bs-target="#modalAddProducto">
+          <i class="fas fa-plus-circle"></i>   Añadir producto</button>
+</div>
+
+<br/>
+
+<div class="row">
+    
+    <div class="col-4" *ngFor="let item of productList">
+
+        <div class="card">
+            <img src="{{item.photoUrl}}" class="img" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.nombre}}</h5>
+              <p class="card-text">Precio de Venta: ${{item.precioDeVenta}}</p>
+              <p class="card-text">Descuento: {{item.descuento}}%</p>
+              <a (click) ="deleteProduct(item.idProducto!)" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>
+              <br/>
+              <br/>
+              <a [routerLink]="['/producto/edit', item.idProducto!]" routerLinkActive="router-link-active"  class="btn btn-info"> <i class="far fa-edit"></i> Actualizar</a>
+            </div>
+          </div>
+
+    </div>
+
+
+</div>
+
+<br/>
+
+<table class="table">
+    <thead>
+      <tr class = "text-center">
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Foto del producto</th>
+        <th scope="col">Precio de Venta</th>
+        <th scope="col">Precio de Compra</th>
+        <th scope="col">Inventario Disponible</th>
+        <th scope="col">Descuento</th>
+        <th scope="col">¿Eliminar?</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of productList" style="text-align: center;">
+        <th scope="row">{{item.idProducto}}</th>
+        <td><a [routerLink]="['/producto/edit/', item.idProducto!]" routerLinkActive="router-active">{{item.nombre}}</a></td>
+        <td>{{item.photoUrl?"Yes":"No"}}</td>
+        <td>{{item.precioDeVenta}}</td>
+        <td>{{item.precioDeCompra}}</td>
+        <td>{{item.stock}}</td>
+        <td>{{item.descuento}}</td>
+        <td (click) ="deleteProduct(item.idProducto!)" button class="btn-delete" type="button"><i class="far fa-trash-alt"></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+<!-- Modal Agregar Productos -->
+<form (ngSubmit)="createProduct()" #form="ngForm" class="form-horizontal">
+  <div class="modal fade" id="modalAddProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Creacion de Productos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-12 control-label pb-2" for="nombre">Nombre del Producto</label>
+            <div class="col-md-12">
+              <input id="nombre" name="nombre" type="text" placeholder="Nombre del producto"
+                [(ngModel)]="product.nombre" class="form-control input-md pb-2" required="">
+
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-12 control-label pb-2 pt-2 " for="photoUrl">Foto del Producto</label>
+            <div class="col-md-12">
+              <input id="photoUrl" name="photoUrl" type="text" placeholder="Foto del Producto"
+                [(ngModel)]="product.photoUrl" class="form-control input-md pb-2" required="">
+
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-12 control-label pb-2 pt-2" for="precioDeVenta">Precio de Venta</label>
+            <div class="col-md-12">
+              <input id="precioDeVenta" name="precioDeVenta" type="text" placeholder="Precio de Venta del producto"
+                [(ngModel)]="product.precioDeVenta" class="form-control input-md pb-2" required="">
+
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-12 control-label pb-2 pt-2" for="precioDeCompra">Precio de Compra</label>
+            <div class="col-md-12">
+              <input id="precioDeCompra" name="precioDeCompra" type="text" placeholder="Precio de Compra del producto"
+                [(ngModel)]="product.precioDeCompra" class=" form-control input-md pb-2" required="">
+
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-12 control-label pb-2 pt-2" for="stock">Unidades Disponibles</label>
+            <div class="col-md-12">
+              <input id="stock" name="stock" type="text" placeholder="Unidades Disponibles del Producto"
+                [(ngModel)]="product.stock" class="form-control input-md pb-2" required="">
+
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-12 control-label pb-2 pt-2" for="descuento">Descuento</label>
+            <div class="col-md-12">
+              <input id="descuento" name="descuento" type="text" placeholder="Descuento del producto"
+                [(ngModel)]="product.descuento" class="form-control input-md pb-2" required="">
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" [routerLink]="['/producto/list']"
+            routerLinkActive="active">Cerrar</button>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="createProduct()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
