@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IProducto } from '../interfaces/producto.interface';
+import  {environment} from '../../../environments/environment'
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { IProducto } from '../interfaces/producto.interface';
 export class ProductoService {
 
 
-  API_URL:string = "http://localhost:3000" 
+  API_URL:string = environment.apiURL;
 
   constructor(private readonly htttpClient: HttpClient) { }
 

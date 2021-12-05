@@ -1,17 +1,16 @@
-
-
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDomicilio } from '../interfaces/domicilio.interface';
+import  {environment} from '../../../environments/environment'
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DomicilioService {
 
-  API_URL:string = "http://localhost:3000" 
+  API_URL:string = environment.apiURL;
 
   constructor( private readonly htttpClient: HttpClient) { }
 
